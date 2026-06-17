@@ -1,9 +1,12 @@
 import {Component, computed, input, output, ChangeDetectionStrategy} from '@angular/core';
 import {Book} from '../shared/book';
+import {RatingDisplay} from '../rating-display/rating-display';
 
 @Component({
   selector: 'app-book-card',
-  imports: [],
+  imports: [
+    RatingDisplay
+  ],
   templateUrl: './book-card.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './book-card.scss',
