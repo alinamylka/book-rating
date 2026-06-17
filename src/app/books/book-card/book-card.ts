@@ -1,10 +1,11 @@
-import {Component, computed, input, output} from '@angular/core';
+import {Component, computed, input, output, ChangeDetectionStrategy} from '@angular/core';
 import {Book} from '../shared/book';
 
 @Component({
   selector: 'app-book-card',
   imports: [],
   templateUrl: './book-card.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './book-card.scss',
 })
 export class BookCard {

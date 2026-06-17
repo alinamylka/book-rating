@@ -1,4 +1,4 @@
-import {Component, signal} from '@angular/core';
+import {Component, signal, ChangeDetectionStrategy} from '@angular/core';
 import {Book} from '../shared/book';
 import {BookCard} from '../book-card/book-card';
 
@@ -8,6 +8,7 @@ import {BookCard} from '../book-card/book-card';
     BookCard
   ],
   templateUrl: './dashboard-page.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './dashboard-page.scss',
 })
 export class DashboardPage {
