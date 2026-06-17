@@ -49,4 +49,12 @@ export class DashboardPage {
       },
     ]);
   }
+
+  protected doRateDown(book: Book) {
+    console.log(book.isbn);
+  }
+
+  protected doRateUp(book: Book) {
+    console.log(book.isbn);
+  }
 }
