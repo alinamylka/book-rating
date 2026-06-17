@@ -1,6 +1,7 @@
 import {Book} from './book';
+import {Service} from '@angular/core';
 
-//@Service
+@Service()
 export class BookRatingHelper {
   rateUp(book: Book) {
     return book;
