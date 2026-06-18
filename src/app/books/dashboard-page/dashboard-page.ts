@@ -53,7 +53,7 @@ export class DashboardPage {
     ]);
   }
 
-  protected doRateDown(book: Book) {
+  doRateDown(book: Book) {
     const ratedBook = this.#helper.rateDown(book)
     this.#updateBooks(ratedBook)
     console.log(book.isbn);
@@ -63,7 +63,7 @@ export class DashboardPage {
     this.books.update(books => books.map(b => b.isbn === book.isbn ? book : b));
   }
 
-  protected doRateUp(book: Book) {
+  doRateUp(book: Book) {
     const ratedBook = this.#helper.rateUp(book)
     this.#updateBooks(ratedBook)
     console.log(book.isbn);
