@@ -1,6 +1,7 @@
-import {Component, signal, ChangeDetectionStrategy} from '@angular/core';
+import {Component, signal, ChangeDetectionStrategy, inject} from '@angular/core';
 import {Book} from '../shared/book';
 import {BookCard} from '../book-card/book-card';
+import {BookRatingHelper} from '../shared/book-rating-helper';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -12,6 +13,7 @@ import {BookCard} from '../book-card/book-card';
   styleUrl: './dashboard-page.scss',
 })
 export class DashboardPage {
+  readonly #helper: BookRatingHelper = inject(BookRatingHelper);
   protected readonly books = signal<Book[]>([]);
 
   constructor() {
@@ -52,10 +54,18 @@ export class DashboardPage {
   }
 
   protected doRateDown(book: Book) {
+    const ratedBook = this.#helper.rateDown(book)
+    this.#updateBooks(ratedBook)
     console.log(book.isbn);
   }
 
+  #updateBooks(book: Book) {
+    this.books.update(books => books.map(b => b.isbn === book.isbn ? book : b));
+  }
+
   protected doRateUp(book: Book) {
+    const ratedBook = this.#helper.rateUp(book)
+    this.#updateBooks(ratedBook)
     console.log(book.isbn);
   }
 }

@@ -18,10 +18,10 @@ export class BookCard {
   readonly rateDown = output<Book>()
 
   protected doRateDown() {
-    this.rateUp.emit(this.book());
+    this.rateDown.emit(this.book());
   }
 
   protected doRateUp() {
-    this.rateDown.emit(this.book());
+    this.rateUp.emit(this.book());
   }
 }
