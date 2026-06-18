@@ -1,6 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { DashboardPage } from './dashboard-page';
+import {DashboardPage} from './dashboard-page';
+import {BookRatingHelper} from '../shared/book-rating-helper';
+import {Book} from '../shared/book';
 
 describe('DashboardPage', () => {
   let component: DashboardPage;
@@ -8,9 +10,14 @@ describe('DashboardPage', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DashboardPage]
+      imports: [DashboardPage],
+      providers: [
+        {
+          provide: BookRatingHelper, useValue: {rateUp: (book: Book) => book, rateDown: (book: Book) => book}
+        }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(DashboardPage);
     component = fixture.componentInstance;
