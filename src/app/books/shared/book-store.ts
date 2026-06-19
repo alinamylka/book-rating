@@ -1,5 +1,5 @@
 import {inject, Service} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, httpResource, HttpResourceRef} from '@angular/common/http';
 import {Book} from './book';
 
 @Service()
@@ -9,6 +9,10 @@ export class BookStore {
 
   getAll = () => {
     return this.#http.get<Book[]>(`${this.#apiUrl}/books`)
+  }
+
+  getAllResource(): HttpResourceRef<Book[]> {
+    return httpResource(() => `${this.#apiUrl}/books`, {defaultValue: []})
   }
 
   getSingle = (isbn: number) => {

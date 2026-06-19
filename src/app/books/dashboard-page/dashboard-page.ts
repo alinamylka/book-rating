@@ -1,4 +1,4 @@
-import {Component, signal, ChangeDetectionStrategy, inject} from '@angular/core';
+import {Component, ChangeDetectionStrategy, inject} from '@angular/core';
 import {Book} from '../shared/book';
 import {BookCard} from '../book-card/book-card';
 import {BookRatingHelper} from '../shared/book-rating-helper';
@@ -14,13 +14,9 @@ import {BookStore} from '../shared/book-store';
   styleUrl: './dashboard-page.scss',
 })
 export class DashboardPage {
-  protected readonly books = signal<Book[]>([]);
-  readonly #helper: BookRatingHelper = inject(BookRatingHelper);
   readonly #bookStore: BookStore = inject(BookStore);
-
-  constructor() {
-    this.#bookStore.getAll().subscribe(books => this.books.set(books));
-  }
+  readonly #helper: BookRatingHelper = inject(BookRatingHelper);
+  protected readonly books = this.#bookStore.getAllResource()
 
   doRateDown(book: Book) {
     const ratedBook = this.#helper.rateDown(book)
