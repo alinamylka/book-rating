@@ -5,7 +5,7 @@
   @for (book of books.value(); track book.isbn) {
     <app-book-card [book]="book" [ratingUpDisabled]="isRatingUpDisabled(book)"
                    [ratingDownDisabled]="isRatingDownDisabled(book)" (rateDown)="doRateDown($event)"
-                   (rateUp)="doRateUp($event)"></app-book-card>
+                   (rateUp)="doRateUp($event)" (deleted)="doDelete(book)"></app-book-card>
   }
 
 }

@@ -5,7 +5,7 @@ import {Book} from './book';
 @Service()
 export class BookStore {
   #http = inject(HttpClient);
-  #apiUrl = 'http://api.angular.schule';
+  #apiUrl = 'https://api.angular.schule';
 
   readonly booksResource = this.#getAllResource()
 
@@ -25,6 +25,9 @@ export class BookStore {
     return httpResource<Book>(() => `${this.#apiUrl}/books/${isbn()}`)
   }
 
+  delete(isbn: string) {
+    return this.#http.delete<Book>(`${this.#apiUrl}/books/${isbn}`)
+  }
   create = (book: Book) => {
     return this.#http.post<Book>(`${this.#apiUrl}/book`, book)
   }

@@ -15,5 +15,6 @@
     <button type="button" class="btn btn-green" (click)="doRateDown()" [disabled]="ratingDownDisabled()">-</button>
     <button type="button" class="btn btn-red" (click)="doRateUp()" [disabled]="ratingUpDisabled()">+</button>
     <a [routerLink]="['/books', book().isbn]" class="btn btn-primary">Details</a>
+    <button type="button" class="btn btn-secondary" (click)="doDelete()">Delete</button>
   </div>
 </article>

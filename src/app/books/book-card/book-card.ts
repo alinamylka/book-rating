@@ -19,6 +19,7 @@ export class BookCard {
   readonly rateDown = output<Book>()
   readonly ratingUpDisabled = input<boolean>()
   readonly ratingDownDisabled = input<boolean>()
+  readonly deleted = output<boolean>()
 
   protected doRateDown() {
     this.rateDown.emit(this.book());
@@ -26,5 +27,9 @@ export class BookCard {
 
   protected doRateUp() {
     this.rateUp.emit(this.book());
+  }
+
+  protected doDelete() {
+    this.deleted.emit(true);
   }
 }

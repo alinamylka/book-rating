@@ -35,11 +35,26 @@ export class DashboardPage {
   protected isRatingUpDisabled(book: Book) {
     return this.#helper.isRatingUpDisabled(book)
   }
+
   protected isRatingDownDisabled(book: Book) {
     return this.#helper.isRatingDownDisabled(book)
   }
 
   protected reload() {
     this.books.reload()
+  }
+
+  protected doDelete(book: Book) {
+    const confirmed = window.confirm(`Are you sure you want to delete the book "${book.title}"?`);
+    if (confirmed) {
+      this.#bookStore.delete(book.isbn).subscribe({
+        next: () => {
+          this.books.update(books => books.filter(b => b.isbn !== book.isbn));
+        },
+        error: (err) => {
+          console.error(`Failed to delete book with ISBN ${book.isbn}:`, err);
+        }
+      });
+    }
   }
 }
