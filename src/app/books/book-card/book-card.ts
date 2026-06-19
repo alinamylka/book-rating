@@ -16,6 +16,8 @@ export class BookCard {
   readonly authors = computed(() => this.book().authors.join(', '));
   readonly rateUp = output<Book>()
   readonly rateDown = output<Book>()
+  readonly ratingUpDisabled = input<boolean>()
+  readonly ratingDownDisabled = input<boolean>()
 
   protected doRateDown() {
     this.rateDown.emit(this.book());

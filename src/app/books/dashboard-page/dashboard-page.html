@@ -1,4 +1,6 @@
 There are {{ books().length }} books in the library.fdasfads
 @for (book of books(); track book.isbn) {
-  <app-book-card [book]="book" (rateDown)="doRateDown($event)" (rateUp)="doRateUp($event)"></app-book-card>
+  <app-book-card [book]="book" [ratingUpDisabled]="isRatingUpDisabled(book)"
+                 [ratingDownDisabled]="isRatingDownDisabled(book)" (rateDown)="doRateDown($event)"
+                 (rateUp)="doRateUp($event)"></app-book-card>
 }

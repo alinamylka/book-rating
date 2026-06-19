@@ -2,6 +2,7 @@ import {Component, signal, ChangeDetectionStrategy, inject} from '@angular/core'
 import {Book} from '../shared/book';
 import {BookCard} from '../book-card/book-card';
 import {BookRatingHelper} from '../shared/book-rating-helper';
+import {BookStore} from '../shared/book-store';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -13,50 +14,17 @@ import {BookRatingHelper} from '../shared/book-rating-helper';
   styleUrl: './dashboard-page.scss',
 })
 export class DashboardPage {
-  readonly #helper: BookRatingHelper = inject(BookRatingHelper);
   protected readonly books = signal<Book[]>([]);
+  readonly #helper: BookRatingHelper = inject(BookRatingHelper);
+  readonly #bookStore: BookStore = inject(BookStore);
 
   constructor() {
-    this.books.set([
-      {
-        isbn: '978-0-261-10333-4',
-        title: 'The Hobbit',
-        description: 'A fantasy adventure about Bilbo Baggins and his unexpected journey.',
-        authors: ['J.R.R. Tolkien'],
-        price: 12.99,
-        rating: 5,
-      },
-      {
-        isbn: '978-0-452-28423-4',
-        title: '1984',
-        description: 'A dystopian novel about surveillance, control, and totalitarianism.',
-        authors: ['George Orwell'],
-        price: 10.99,
-        rating: 5,
-      },
-      {
-        isbn: '978-0-06-112008-4',
-        title: 'To Kill a Mockingbird',
-        description: 'A novel about justice, morality, and racism in the American South.',
-        authors: ['Harper Lee'],
-        price: 11.99,
-        rating: 4,
-      },
-      {
-        isbn: '978-0-441-17271-9',
-        title: 'Dune',
-        description: 'An epic science fiction story of politics, prophecy, and survival on Arrakis.',
-        authors: ['Frank Herbert'],
-        price: 14.99,
-        rating: 5,
-      },
-    ]);
+    this.#bookStore.getAll().subscribe(books => this.books.set(books));
   }
 
   doRateDown(book: Book) {
     const ratedBook = this.#helper.rateDown(book)
     this.#updateBooks(ratedBook)
-    console.log(book.isbn);
   }
 
   #updateBooks(book: Book) {
@@ -66,6 +34,12 @@ export class DashboardPage {
   doRateUp(book: Book) {
     const ratedBook = this.#helper.rateUp(book)
     this.#updateBooks(ratedBook)
-    console.log(book.isbn);
+  }
+
+  protected isRatingUpDisabled(book: Book) {
+    return this.#helper.isRatingUpDisabled(book)
+  }
+  protected isRatingDownDisabled(book: Book) {
+    return this.#helper.isRatingDownDisabled(book)
   }
 }

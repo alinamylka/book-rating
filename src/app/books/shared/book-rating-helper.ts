@@ -19,4 +19,12 @@ export class BookRatingHelper {
       rating: Math.max(1, book.rating - 1),
     }
   }
+
+  isRatingUpDisabled(book: Book) {
+    return book.rating >= 5;
+  }
+
+  isRatingDownDisabled(book: Book) {
+    return  book.rating <= 1;
+  }
 }

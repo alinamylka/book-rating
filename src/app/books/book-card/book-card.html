@@ -12,7 +12,7 @@
     <p>Authors: {{ authors() }}</p>
     <p><strong>Preis:</strong> {{ book().price }}</p>
     <app-rating-display [value]="book().rating"></app-rating-display>
-    <button type="button" class="btn btn-green" (click)="doRateDown()">-</button>
-    <button type="button" class="btn btn-red" (click)="doRateUp()">+</button>
+    <button type="button" class="btn btn-green" (click)="doRateDown()" [disabled]="ratingDownDisabled()">-</button>
+    <button type="button" class="btn btn-red" (click)="doRateUp()" [disabled]="ratingUpDisabled()">+</button>
   </div>
 </article>
