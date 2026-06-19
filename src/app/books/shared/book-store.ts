@@ -21,6 +21,10 @@ export class BookStore {
     return this.#http.get<Book>(`${this.#apiUrl}/books/${isbn}`)
   }
 
+  getSingleResource(isbn: () => string) {
+    return httpResource<Book>(() => `${this.#apiUrl}/books/${isbn()}`)
+  }
+
   create = (book: Book) => {
     return this.#http.post<Book>(`${this.#apiUrl}/book`, book)
   }

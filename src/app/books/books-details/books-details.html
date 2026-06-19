@@ -1,1 +1,10 @@
-<p>books-details works!</p>
+<p>ISBN: {{ isbn() }}</p>
+
+@if (book.hasValue()) {
+  <app-book-card [book]="book.value()"></app-book-card>
+} @else if (book.error()) {
+  <div class="alert alert-danger">Error loading book: {{ book.error() }}</div>
+} @else {
+  <div>Loading...</div>
+}
+<a [routerLink]="['/books']" class="btn btn-primary">Back to list</a>
