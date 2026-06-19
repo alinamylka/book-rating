@@ -1,5 +1,6 @@
+status books: {{ books.status() }}
 @if(books.hasValue()){
-  There are {{ books.value().length }} books in the library.fdasfads
+  There are {{ books.value().length }} books in the library.
   @for (book of books.value(); track book.isbn) {
     <app-book-card [book]="book" [ratingUpDisabled]="isRatingUpDisabled(book)"
                    [ratingDownDisabled]="isRatingDownDisabled(book)" (rateDown)="doRateDown($event)"
