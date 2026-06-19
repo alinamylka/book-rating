@@ -6,6 +6,7 @@ import {Book} from '../shared/book';
 import {Mock} from 'vitest';
 import {BookStore} from '../shared/book-store';
 import {of} from 'rxjs';
+import {resource} from '@angular/core';
 
 describe('DashboardPage', () => {
   let component: DashboardPage;
@@ -21,9 +22,11 @@ describe('DashboardPage', () => {
           provide: BookRatingHelper, useValue: {rateUp: rateUp, rateDown: vi.fn()}
         },
         {
-          provide: BookStore, useValue: {getAll: of()}
+          provide: BookStore, useValue: {
+            getAll: of(),
+            getAllResource: () => resource({loader: () => Promise.resolve([])})
+          }
         }
-
       ]
     })
       .compileComponents();

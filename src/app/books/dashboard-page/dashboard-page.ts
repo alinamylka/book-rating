@@ -38,4 +38,8 @@ export class DashboardPage {
   protected isRatingDownDisabled(book: Book) {
     return this.#helper.isRatingDownDisabled(book)
   }
+
+  protected reload() {
+    this.books.reload()
+  }
 }

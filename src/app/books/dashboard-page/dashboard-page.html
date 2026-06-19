@@ -1,4 +1,5 @@
 status books: {{ books.status() }}
+<button (click)="reload()">Reload</button>
 @if(books.hasValue()){
   There are {{ books.value().length }} books in the library.
   @for (book of books.value(); track book.isbn) {
