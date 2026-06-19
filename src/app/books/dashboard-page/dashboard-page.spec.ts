@@ -4,6 +4,8 @@ import {DashboardPage} from './dashboard-page';
 import {BookRatingHelper} from '../shared/book-rating-helper';
 import {Book} from '../shared/book';
 import {Mock} from 'vitest';
+import {BookStore} from '../shared/book-store';
+import {of} from 'rxjs';
 
 describe('DashboardPage', () => {
   let component: DashboardPage;
@@ -17,7 +19,11 @@ describe('DashboardPage', () => {
       providers: [
         {
           provide: BookRatingHelper, useValue: {rateUp: rateUp, rateDown: vi.fn()}
+        },
+        {
+          provide: BookStore, useValue: {getAll: of()}
         }
+
       ]
     })
       .compileComponents();
