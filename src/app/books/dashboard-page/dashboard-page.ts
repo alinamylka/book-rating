@@ -16,7 +16,7 @@ import {BookStore} from '../shared/book-store';
 export class DashboardPage {
   readonly #bookStore: BookStore = inject(BookStore);
   readonly #helper: BookRatingHelper = inject(BookRatingHelper);
-  protected readonly books = this.#bookStore.getAllResource()
+  protected readonly books = this.#bookStore.booksResource
 
   doRateDown(book: Book) {
     const ratedBook = this.#helper.rateDown(book)

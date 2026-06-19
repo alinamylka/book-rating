@@ -22,9 +22,11 @@ describe('DashboardPage', () => {
           provide: BookRatingHelper, useValue: {rateUp: rateUp, rateDown: vi.fn()}
         },
         {
-          provide: BookStore, useValue: {
-            getAll: of(),
-            getAllResource: () => resource({loader: () => Promise.resolve([])})
+          provide: BookStore, useFactory: () => {
+            return {
+              getAll: of(),
+              booksResource: resource({loader: () => Promise.resolve([])})
+            }
           }
         }
       ]

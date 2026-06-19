@@ -7,11 +7,13 @@ export class BookStore {
   #http = inject(HttpClient);
   #apiUrl = 'http://api.angular.schule';
 
+  readonly booksResource = this.#getAllResource()
+
   getAll = () => {
     return this.#http.get<Book[]>(`${this.#apiUrl}/books`)
   }
 
-  getAllResource(): HttpResourceRef<Book[]> {
+  #getAllResource(): HttpResourceRef<Book[]> {
     return httpResource(() => `${this.#apiUrl}/books`, {defaultValue: []})
   }
 
