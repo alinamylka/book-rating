@@ -5,5 +5,6 @@ import {ErrorPage} from './error-page/error-page';
 export const routes: Routes = [
   {path: '', redirectTo: 'books', pathMatch: 'full'},
   ...bookRoutes,
+  {path: 'error', component: ErrorPage},
   {path: "**", component: ErrorPage}
 ];
