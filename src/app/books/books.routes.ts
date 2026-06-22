@@ -3,6 +3,6 @@ import {BooksDetails} from './books-details/books-details';
 import {DashboardPage} from './dashboard-page/dashboard-page';
 
 export const bookRoutes: Routes = [
-  {path: 'books', component: DashboardPage, title: 'Books'},
-  {path: 'books/:isbn', component: BooksDetails, title: 'Book Details'},
+  {path: '', component: DashboardPage, title: 'Books'},
+  {path: ':isbn', component: BooksDetails, title: 'Book Details'},
 ];
