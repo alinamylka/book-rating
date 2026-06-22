@@ -1,11 +1,11 @@
-/*
-.nav {
-  display: grid;
-  grid-template-rows: 60px 1fr;
-}
-
 .body {
-  display: grid;
-  grid-template-columns: 60px 1fr;
+  display: flex;
+  gap: 20px;
 }
-*/
+.nav {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+}
