@@ -1,10 +1,11 @@
-import {Component, ChangeDetectionStrategy, inject, signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, DestroyRef, inject, signal} from '@angular/core';
 import {Book} from '../shared/book';
 import {BookCard} from '../book-card/book-card';
 import {BookRatingHelper} from '../shared/book-rating-helper';
 import {BookStore} from '../shared/book-store';
-import {interval, Subscription, timer} from 'rxjs';
+import {interval, map} from 'rxjs';
 import {DatePipe} from '@angular/common';
+import {takeUntilDestroyed, toSignal} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -19,19 +20,26 @@ import {DatePipe} from '@angular/common';
 export class DashboardPage {
   readonly #bookStore: BookStore = inject(BookStore);
   readonly #helper: BookRatingHelper = inject(BookRatingHelper);
-  readonly currentTime  = signal<Date>(new Date());
-  #timerSubscription!: Subscription;
+  readonly #destroyRef = inject(DestroyRef);
+  readonly currentTime = signal<Date>(new Date());
+  readonly currentTimeWithSignal = toSignal(
+    interval(1000).pipe(
+      map(() => new Date()),
+      takeUntilDestroyed(this.#destroyRef)
+    ),
+    {initialValue: new Date()}
+  );
+  readonly interval = setInterval(() => {
+    console.log(`tick: ${new Date()}`);
+    this.currentTime.set(new Date())
+  }, 1000);
+
+  constructor() {
+    this.#destroyRef.onDestroy(() => clearInterval(this.interval));
+  }
+
+
   protected readonly books = this.#bookStore.booksResource
-
-  ngOnInit() {
-    this.#timerSubscription = interval(1000).subscribe(() => {
-      this.currentTime.set(new Date());
-    })
-  }
-
-  ngOnDestroy() {
-    this.#timerSubscription.unsubscribe();
-  }
 
   doRateDown(book: Book) {
     const ratedBook = this.#helper.rateDown(book)
