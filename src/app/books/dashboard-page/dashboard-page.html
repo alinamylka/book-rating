@@ -1,5 +1,5 @@
 <button (click)="reload()" class="btn btn-secondary">Reload</button>
-<div> status books: {{ books.status() }}</div>
+<div> status books: {{ books.status() }} current time {{currentTime() | date:'medium'}}</div>
 @if (books.hasValue()) {
   <div>There are {{ books.value().length }} books in the library.</div>
   @for (book of books.value(); track book.isbn) {
