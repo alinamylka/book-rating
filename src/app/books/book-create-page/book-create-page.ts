@@ -10,13 +10,14 @@ import {
   provideSignalFormsConfig,
   required
 } from '@angular/forms/signals';
-import {JsonPipe} from '@angular/common';
+import {CurrencyPipe, JsonPipe} from '@angular/common';
 
 @Component({
   selector: 'app-book-create-page',
   imports: [
     FormField,
-    JsonPipe
+    JsonPipe,
+    CurrencyPipe
   ],
   templateUrl: './book-create-page.html',
   styleUrl: './book-create-page.scss',

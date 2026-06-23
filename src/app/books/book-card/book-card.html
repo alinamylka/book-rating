@@ -10,7 +10,7 @@
     </header>
     <p>{{ book().description }}</p>
     <p>Authors: {{ authors() }}</p>
-    <p><strong>Preis:</strong> {{ book().price }}</p>
+    <p><strong>Preis:</strong> {{ book().price | currency:'CHF'}}</p>
     <app-rating-display [value]="book().rating"></app-rating-display>
     <button type="button" class="btn btn-green" (click)="doRateDown()" [disabled]="ratingDownDisabled()">-</button>
     <button type="button" class="btn btn-red" (click)="doRateUp()" [disabled]="ratingUpDisabled()">+</button>

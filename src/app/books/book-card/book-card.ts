@@ -2,11 +2,12 @@ import {Component, computed, input, output, ChangeDetectionStrategy} from '@angu
 import {Book} from '../shared/book';
 import {RatingDisplay} from '../rating-display/rating-display';
 import {RouterLink} from '@angular/router';
+import {CurrencyPipe} from '@angular/common';
 
 @Component({
   selector: 'app-book-card',
   imports: [
-    RatingDisplay, RouterLink
+    RatingDisplay, RouterLink, CurrencyPipe
   ],
   templateUrl: './book-card.html',
   changeDetection: ChangeDetectionStrategy.Eager,
