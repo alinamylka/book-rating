@@ -1,6 +1,7 @@
 import {Component, inject, signal} from '@angular/core';
 import {Book} from '../shared/book';
 import {
+  apply,
   form,
   FormField, FormRoot,
   max,
@@ -8,13 +9,20 @@ import {
   min,
   minLength,
   provideSignalFormsConfig,
-  required
+  required, schema
 } from '@angular/forms/signals';
 import {JsonPipe} from '@angular/common';
 import {BookStore} from '../shared/book-store';
 import {firstValueFrom} from 'rxjs';
 import {Router} from '@angular/router';
 import {HttpErrorResponse} from '@angular/common/http';
+
+const isbnSchema = schema<String>((path) => {
+    required(path, {message: 'ISBN is required.'});
+    minLength(path, 13, {message: 'ISBN must be 13 characters.'});
+    maxLength(path, 13, {message: 'ISBN must be 13 characters.'});
+  }
+)
 
 @Component({
   selector: 'app-book-create-page',
@@ -46,9 +54,7 @@ export class BookCreatePage {
   );
   protected readonly bookForm = form(this.bookFormData, path => {
       {
-        required(path.isbn, {message: 'ISBN is required.'});
-        minLength(path.isbn, 13, {message: 'ISBN must be 13 characters.'});
-        maxLength(path.isbn, 13, {message: 'ISBN must be 13 characters.'});
+        apply(path.isbn, isbnSchema)
         required(path.title, {message: "Title is required."});
         required(path.rating, {message: "Rating is required."});
         min(path.rating, 1, {message: "Rating must be at least 1."});
