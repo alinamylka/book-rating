@@ -1,1 +1,11 @@
-<p>book-search-page works!</p>
+<div class="form-group">
+  <input type="text" id="search" class="form-control" [formField]="searchForm" />
+</div>
+
+<div>
+  @for(book of searchResults.value(); track book.isbn){
+    <div> {{book.isbn}}</div>
+    <div> {{book.title}}</div>
+    <div> {{book.description}}</div>
+  }
+</div>

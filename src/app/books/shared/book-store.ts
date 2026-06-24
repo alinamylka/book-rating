@@ -25,9 +25,17 @@ export class BookStore {
     return httpResource<Book>(() => `${this.#apiUrl}/books/${isbn()}`)
   }
 
+  searchBookResource(searchTerm: () => string | undefined) {
+    return httpResource<Book[]>(() => {
+      let term = searchTerm();
+      term ? `${this.#apiUrl}/books/search/${term}` : []
+    }, {defaultValue: []})
+  }
+
   delete(isbn: string) {
     return this.#http.delete<Book>(`${this.#apiUrl}/books/${isbn}`)
   }
+
   create = (book: Book) => {
     return this.#http.post<Book>(`${this.#apiUrl}/book`, book)
   }
